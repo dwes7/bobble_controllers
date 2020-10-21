@@ -1,14 +1,16 @@
 name: CI
 
 on: [push, pull_request]
+
 jobs:
-  bobble_controllers:
+  industrial_ci:
     strategy:
-    matrix:
-    env:
-      - {ROS_DISTRO: melodic, ROS_REPO: main}
+      matrix:
+        env:
+          - {ROS_DISTRO: melodic, ROS_REPO: testing}
+          - {ROS_DISTRO: melodic, ROS_REPO: main}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: 'dwes7/bobble_controllers@main'
-        env: ${{matrix.env}}:
+      - uses: 'ros-industrial/industrial_ci@master'
+        env: ${{matrix.env}}
