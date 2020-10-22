@@ -12,6 +12,11 @@ on: [push, pull_request] # on all pushes and PRs
 #   pull_request:
 #     branches: [ master ]
 
+<<<<<<< HEAD
+=======
+on: [push, pull_request]
+
+>>>>>>> 74be9aa... update workflow
 jobs:
   industrial_ci:
     strategy:
@@ -19,6 +24,7 @@ jobs:
         env:
           - {ROS_DISTRO: melodic, ROS_REPO: testing}
           - {ROS_DISTRO: melodic, ROS_REPO: main}
+<<<<<<< HEAD
     env:
       CCACHE_DIR: /github/home/.ccache # Directory for ccache (and how we enable ccache in industrial_ci)
     runs-on: ubuntu-latest
@@ -30,8 +36,16 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
       - name : Install Python Dependencies
-        run: python -m pip install --upgrade pip
-        pip install rosbag_pandas matplotlib
+        run: | 
+          python -m pip install --upgrade pip
+          pip install rosbag_pandas matplotlib
       # Run industrial_ci
       - uses: 'ros-industrial/industrial_ci@master'
         env: ${{ matrix.env }}
+=======
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: 'ros-industrial/industrial_ci@master'
+        env: ${{matrix.env}}
+>>>>>>> 74be9aa... update workflow
