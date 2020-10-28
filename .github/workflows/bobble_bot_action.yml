@@ -11,10 +11,13 @@ on: [push, pull_request] # on all pushes and PRs
 #   # When there is a pull request against master
 #   pull_request:
 #     branches: [ master ]
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
 on: [push, pull_request]
+=======
+>>>>>>> 9aa543d... Try this action
 
 >>>>>>> 74be9aa... update workflow
 jobs:
@@ -24,6 +27,7 @@ jobs:
         env:
           - {ROS_DISTRO: melodic, ROS_REPO: testing}
           - {ROS_DISTRO: melodic, ROS_REPO: main}
+<<<<<<< HEAD
 <<<<<<< HEAD
     env:
       CCACHE_DIR: /github/home/.ccache # Directory for ccache (and how we enable ccache in industrial_ci)
@@ -43,9 +47,23 @@ jobs:
       - uses: 'ros-industrial/industrial_ci@master'
         env: ${{ matrix.env }}
 =======
+=======
+    env:
+      CCACHE_DIR: /github/home/.ccache # Directory for ccache (and how we enable ccache in industrial_ci)
+>>>>>>> 9aa543d... Try this action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      # This step will fetch/store the directory used by ccache before/after the ci run
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+      # Run industrial_ci
       - uses: 'ros-industrial/industrial_ci@master'
+<<<<<<< HEAD
         env: ${{matrix.env}}
 >>>>>>> 74be9aa... update workflow
+=======
+        env: ${{ matrix.env }}
+>>>>>>> 9aa543d... Try this action
